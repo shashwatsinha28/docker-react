@@ -1,0 +1,10 @@
+language: generic
+sudo: required # To run docker in tests, sudo is required
+services: # Docker cli instance needs to be running to build and run tests on image
+  - docker
+
+before_install: # Steps to do before running test
+  - docker build -t shashs28/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true shashs28/docker-react npm run test -- --coverage
