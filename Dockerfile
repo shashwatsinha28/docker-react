@@ -9,5 +9,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx
+EXPOSE 80
+# Expose does not do anything locally, expose instruction works on elastic beanstalk to map container port to vm port
 COPY --from=builder /app/build /usr/share/nginx/html
 # No default command needed as nginx base image has command to start nginx
